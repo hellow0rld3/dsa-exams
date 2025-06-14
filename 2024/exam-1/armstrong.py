@@ -1,6 +1,14 @@
 from queue import PriorityQueue
 from math import inf, floor
 
+"""
+Dla kazdego roweru nalezy rozwazyc sciezke do niego a potem od niego do mety (od mety do niego),
+ktora wymnozymy przez wspolczynnik p/q roweru i porownamy do alternatywnej sciezki bez roweru.
+Zlozonosc czasowa rozwiazania: 2ElogV + |B| + |G| = O(ElogV).
+"""
+
+
+
 def build_graph(edges):
   n = max(map(lambda x: max(x[0], x[1]), edges)) + 1
   graph = [[] for _ in range(n)]
