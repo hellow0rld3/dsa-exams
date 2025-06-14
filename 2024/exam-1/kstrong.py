@@ -1,30 +1,38 @@
 from math import inf
 
 """
-Dla kazdego podciagu (i,j) sortujemy go i usuwamy elementy dopóki są ujemne lub dopóki usunęliśmy ich maksymalnie k
-dla kazdej iteracji zapisujemy sume i porównujemy z maksymalna suma do tej pory. Rozwiazanie ma zlozonosc:
-n^2 * nlogn * k = O(n^2logn) [zlozonosc akceptowalna, nie potrafie rozwiazac na zlozonosc O(nk)] Rozwiazanie suboptymalne,
-"""
+f(i, j) = najwieksza suma podciagu konczacego sie na i przy j usuniętych elementach
+               f(i-1, j-1)                , usuwamy i-ty element, dodajemy jedno ciecie
+f(i, j) = max{ f(i-1, j) + T[i] }         , dodajemy i-ty element
+               T[i]                       , rozpoczynamy nowy podciag
 
-def kstrong( T, k):
-  if not T:
-     return 0
-    
-  n = len(T)
-  max_sum = float('-inf')
-    
-  for i in range(n):
-    for j in range(i, n):
-        subarray = sorted(T[i:j+1])
-            
-        current_sum = sum(subarray)
-        best_sum = current_sum
-            
-        for remove_count in range(1, min(k + 1, len(subarray) + 1)):
-            current_sum -= subarray[remove_count - 1]
-            best_sum = max(best_sum, current_sum)
-            
-        max_sum = max(max_sum, best_sum)
-    
-  return max_sum
+Base case: f(i, i) = 0
+"""
+def kstrong(T, k):
+   n= len(T)
+
+   if k > n:
+      k = n
+
+   #tablica memo
+   f = [[0 for _ in range(k+1)] for _ in range(n+1)]
+
+   #Base Cases
+   for l in range(min(n+1,k+1)):
+      if l <= k:
+        f[l][l] = 0 
+  
+   for m in range(1,k+1):
+      f[0][m] = -inf
+
+   #Rekurencja
+   maksimum = -inf
+   for i in range(1, n+1):
+      for j in range(k+1):
+         f[i][j] = max(T[i-1], f[i-1][j] + T[i-1])
+         if j >= 1:
+            f[i][j] = max(f[i][j], f[i-1][j-1])
+         maksimum = max(maksimum, f[i][j])
+
+   return maksimum
 
