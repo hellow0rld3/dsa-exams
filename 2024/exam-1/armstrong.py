@@ -7,8 +7,6 @@ ktora wymnozymy przez wspolczynnik p/q roweru i porownamy do alternatywnej sciez
 Zlozonosc czasowa rozwiazania: 2ElogV + |B| + |G| = O(ElogV).
 """
 
-
-
 def build_graph(edges):
   n = max(map(lambda x: max(x[0], x[1]), edges)) + 1
   graph = [[] for _ in range(n)]
