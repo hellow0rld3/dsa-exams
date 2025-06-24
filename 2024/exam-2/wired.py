@@ -21,4 +21,4 @@ def wired( T ):
             for k in range(i+1, j+1, 2):
                 dp[i][j] = min(dp[i][j], 1 + abs(T[i] - T[k]) + (dp[i+1][k-1] if i+1 < k-1 else 0) + (dp[k+1][j] if k+1 < j else 0) )
                                
-    return dp[0][n-1]
+    return dp[0][n-1] #xd
