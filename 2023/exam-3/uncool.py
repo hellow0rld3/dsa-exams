@@ -1,6 +1,6 @@
 """
 Tworzymy listę z indeksami i sortujemy według początku przedziału, przechodzimy przez posortowane przedziały, dla których sprawdzamy przedziały które zaczynają się później. Jeśli mamy przecięcie,
-to sprawdzamy czy para jest niefajna - sprawdzamy czy jedenzawiera się w drugim, i jeśli nie,
+to sprawdzamy czy para jest niefajna - sprawdzamy czy jedenzawiera się w drugim i jeśli nie,
 to mamy parę niefajną.
 """
 
